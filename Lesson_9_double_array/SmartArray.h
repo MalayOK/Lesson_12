@@ -45,9 +45,10 @@ SmartArray<T>::~SmartArray()
 template <class T>
 T SmartArray<T>::operator [] (int index)const
 {
-	
 	if ((index > size) || (index < 0))
-		return 0;
+	{
+		throw std::runtime_error("Index cannot be negative");
+	}
 	return myarray[index];
 }
 
@@ -72,17 +73,24 @@ T SmartArray<T>::GetAt(int index)const
 	MY_MACROS;
 #endif
 	if ((index > size) || (index < 0))
-		return 0;
+	{
+		throw std::runtime_error("Index error");
+	}
 	return myarray[index - 1];
 }
 
 template <class T>
 int SmartArray<T>::FindNext(int index, T value)const
 {
+	
 #ifdef _DEBUG
 	std::cout << "FindNext()" << std::endl;
 	MY_MACROS;
 #endif
+		if ((index > size) || (index < 0))
+		{
+			throw std::runtime_error("Index error");
+		}
 	for (int i = index; i < size; ++i)
 	{
 		if (myarray[i] == value)
@@ -98,6 +106,10 @@ void SmartArray<T>::Insert(int index, T value)
 	std::cout << "Insert()" << std::endl;
 	MY_MACROS;
 #endif
+	if ((index > size) || (index < 0))
+	{
+		throw std::runtime_error("Index error");
+	}
 	if (size == capacity)
 		Resize();
 	size++;
@@ -113,10 +125,13 @@ void SmartArray<T>::Insert(int index, T value)
 	void SmartArray<T>::Remove(int index)
 	{
 #ifdef _DEBUG
-		std::cout << "Resize()" << std::endl;
+		std::cout << "Remove()" << std::endl;
 		MY_MACROS;
 #endif
-		
+		if ((index > size) || (index < 0))
+		{
+			throw std::runtime_error("Index error");
+		}
 
 		if (size != 0 && (size * 2) < capacity)
 		{

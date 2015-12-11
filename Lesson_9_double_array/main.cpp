@@ -5,6 +5,8 @@ using namespace std;
 using namespace lesson_13;
 int main()
 {
+	try
+	{
 	SmartArray<int> a;
 	for (int i = 0; i < 100; ++i)
 	{
@@ -21,9 +23,11 @@ int main()
 	a[index];
 	double x = a[10];
 	cout << x<<endl;
-	try
-	{if (index < 0)
-		throw std::runtime_error("Index cannot be negative"); }
+	x = a.GetAt(-122);
+	cout << x;
+	int y = a.FindNext(3, 50);
+	cout << y << endl;	
+	}
 		catch (myexception& ex)
 	{
 		std::cout << "This is my exception!" << ex.what() << std::endl; 
@@ -36,10 +40,7 @@ int main()
 	{
 		std::cout << "Catched exception" << std::endl; 
 	}
-    x=a.GetAt(-122);
-	cout << x;
-	int y=a.FindNext(3, 50);
-	cout << y << endl;
+  
 	cin.get();
 	return 0;
 }
